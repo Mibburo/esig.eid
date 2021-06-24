@@ -1,0 +1,10 @@
+{
+  "realm": "merge",
+  "auth-server-url": "https://esig-eid.minedu.gov.gr/auth/",
+  "ssl-required": "external",
+  "resource": "esig-process-initiator",
+  "credentials": {
+    "secret": "7da6b6a1-b0e0-461f-aa83-9742b6352dfb"
+  },
+  "confidential-port": 0
+}
