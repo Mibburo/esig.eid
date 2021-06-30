@@ -1,0 +1,11 @@
+version: '2'
+services:
+  esig:
+    container_name: esig
+    image:  mibburo/esig:esig
+    expose:
+      - 7001
+    ports:
+      - 9093:7001
+    environment:
+      - KEY=secret

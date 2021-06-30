@@ -16,13 +16,12 @@ public class PathBasedKeycloakConfigResolver implements KeycloakConfigResolver {
 
     private Map<String, KeycloakDeployment> cache = new ConcurrentHashMap<String, KeycloakDeployment>();
 
-    public final static String BASE_URL = StringUtils.isEmpty(System.getenv("BASE_URL"))?"http://localhost:9090/":System.getenv("BASE_URL");
+    public final static String BASE_URL = StringUtils.isEmpty(System.getenv("BASE_URL"))?"http://localhost:7001/":System.getenv("BASE_URL");
 
     @Override
     public KeycloakDeployment resolve(OIDCHttpFacade.Request request) {
 
         String path = request.getURI();
-
         if (    request.getRelativePath().equals("/")
                 || request.getRelativePath().equals("/error")
                 || request.getRelativePath().equals("/rest/nonce")
