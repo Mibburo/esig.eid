@@ -29,4 +29,12 @@ public class ESigController {
 
         return "redirectView";
     }
+
+    @RequestMapping(value = { "/errorPage"})
+    public String errorPage(@CookieValue(value = TOKEN_NAME, required = false) String jwtCookie,
+                        @CookieValue(value = "type", required = false) String typeCookie,
+                        HttpServletRequest req, Principal principal, ModelMap model, RedirectAttributes redirectAttrs) {
+
+        return "errorPage";
+    }
 }

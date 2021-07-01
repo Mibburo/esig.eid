@@ -22,6 +22,7 @@ public class PathBasedKeycloakConfigResolver implements KeycloakConfigResolver {
     public KeycloakDeployment resolve(OIDCHttpFacade.Request request) {
 
         String path = request.getURI();
+        log.info("xxxxxxxxxxxxxxxxxxxxxxxxxxxx path :{}", path);
         if (    request.getRelativePath().equals("/")
                 || request.getRelativePath().equals("/error")
                 || request.getRelativePath().equals("/rest/nonce")
@@ -47,17 +48,19 @@ public class PathBasedKeycloakConfigResolver implements KeycloakConfigResolver {
             return KeycloakDeploymentBuilder.build(getClass().getResourceAsStream("/esig.json"));
         }
 
-
+        log.info("zzzzzzzzzzzzzzzzzzzzzzzzzz path :{}", path);
 
         if (request.getHeader("referer") != null && !(path.contains("esig") && path.contains("eidas")
                  && path.contains("admin")
                  &&  path.contains("linkedIn"))) {
+            log.info("aaaaaaaaaaaaaaaaaaaaaaa request.getHeader(\"referer\" :{}", request.getHeader("referer"));
+
             path = request.getHeader("referer");
             if ( request.getHeader("referer").endsWith("error")) {
                 return KeycloakDeploymentBuilder.build(getClass().getResourceAsStream("/esig.json"));
             }
         }
-
+        log.info("11111111111111111111111111 path :{}", path);
         int multitenantIndex = path.indexOf("multi/");
 
         String realm = "";
@@ -66,13 +69,13 @@ public class PathBasedKeycloakConfigResolver implements KeycloakConfigResolver {
         } else {
             realm = (request.getRelativePath().split("/"))[1];
         }
-
+        log.info("222222222222222222222222 path :{}", path);
         if (realm.contains("?")) {
             realm = realm.split("\\?")[0];
         }
 
         KeycloakDeployment deployment = cache.get(realm);
-
+        log.info("33333333333333333333333333333 deployment :{}", deployment);
         if (null == deployment) {
             // not found on the simple cache, try to load it from the file system
             InputStream is = getClass().getResourceAsStream("/" + realm + ".json");
@@ -84,6 +87,7 @@ public class PathBasedKeycloakConfigResolver implements KeycloakConfigResolver {
 
         }
         cache.put("sso", deployment);
+        log.info("yyyyyyyyyyyyyyyyyy cache :{}", cache);
 
         return deployment;
     }
