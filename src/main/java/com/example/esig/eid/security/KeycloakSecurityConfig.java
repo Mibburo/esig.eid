@@ -69,7 +69,7 @@ public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
                 .antMatchers("/rest/**").permitAll()
                 .antMatchers("/rest/nonce/**").permitAll()
                 .antMatchers("/errorPage").permitAll()
-                .antMatchers("/esig/**").hasRole("signer")
+                .antMatchers("/sign-now/**").hasRole("offline_access")
 
                 .anyRequest().permitAll()
                 .and()

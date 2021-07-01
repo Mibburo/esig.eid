@@ -22,7 +22,7 @@ public class ESigController {
 
     public final static String TOKEN_NAME = "access_token";
 
-    @RequestMapping(value = { "/esig/register"})
+    @RequestMapping(value = { "/sign-now/register"})
     public String login(@CookieValue(value = TOKEN_NAME, required = false) String jwtCookie,
                               @CookieValue(value = "type", required = false) String typeCookie,
                               HttpServletRequest req, Principal principal, ModelMap model, RedirectAttributes redirectAttrs) {
